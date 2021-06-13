@@ -9,16 +9,13 @@ import mdsgui
 import threading
 
 
-class mtWorker(threading.Thread):  # 继承父类threading.Thread
+class mtWorker(threading.Thread): 
     def __init__(self, rqueue, solidifier ,threadID=1):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.rqueue = rqueue
         self.solidifier = solidifier
-    def run(self):  # 把要执行的代码写到run函数里面 线程在创建后会直接运行run函数
-        # print "Starting " + self.name
-        # print_time(self.name, self.counter, 5)
-        # print "Exiting " + self.name
+    def run(self): 
         self.rqueue.append(self)
         assert isinstance(self.solidifier, mdimagesolidifier.ImageSolidifier)
         self.solidifier.solidify()
